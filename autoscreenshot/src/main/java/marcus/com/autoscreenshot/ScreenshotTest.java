@@ -38,7 +38,7 @@ public abstract class ScreenshotTest<T extends Activity> extends ActivityInstrum
 	@Override
 	protected void setUp() throws Exception
 	{
-		baseOutputPath = Environment.getExternalStorageDirectory() + "/Autoshot/LocalisedScreenshot/";
+		baseOutputPath = Environment.getExternalStorageDirectory() + "/Autoshot/";
 
 		// PNG screenshots to correct outdir
 		config = new Solo.Config();

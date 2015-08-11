@@ -23,5 +23,6 @@ dependencies {
 
     compile group: 'commons-io', name: 'commons-io', version: '2.0.1'
 
+    compile 'com.jayway.android.robotium:robotium-solo:5.3.1'
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.3.1'
 }
