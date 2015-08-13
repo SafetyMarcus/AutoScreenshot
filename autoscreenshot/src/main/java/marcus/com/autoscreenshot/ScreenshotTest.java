@@ -26,7 +26,7 @@ public abstract class ScreenshotTest<T extends Activity> extends ActivityInstrum
 
 	public Solo solo;
 	public String baseOutputPath;
-	public Solo.Config config;
+	private Solo.Config config;
 	public int screenshotIndex;
 	public String locale;
 
@@ -38,18 +38,41 @@ public abstract class ScreenshotTest<T extends Activity> extends ActivityInstrum
 	@Override
 	protected void setUp() throws Exception
 	{
-		baseOutputPath = Environment.getExternalStorageDirectory() + "/Autoshot/";
-
-		// PNG screenshots to correct outdir
-		config = new Solo.Config();
-		config.screenshotFileType = Solo.Config.ScreenshotFileType.PNG;
+		setUpOutputPath("/Autoshot/");
+		config = setUpConfig();
 		config.screenshotSavePath = baseOutputPath;
-
 		solo = new Solo(getInstrumentation(), config);
 		getActivity();
 		dismissDialogs();
 
 		super.setUp();
+	}
+
+	/**
+	 * Allows you to set up the output path to be used for
+	 * saving screenshots
+	 *
+	 * @param outputPath the output path. This should assume
+	 *                   that the output path will go after
+	 *                   Environment.getExternalStorageDirectory()
+	 */
+	public void setUpOutputPath(String outputPath)
+	{
+		baseOutputPath = Environment.getExternalStorageDirectory() + outputPath;
+	}
+
+	/**
+	 * Allows you to set up the configuration to be used when
+	 * saving screenshots. This is where you should set this
+	 * such as the file type. By default this is PNG
+	 *
+	 * @return config The solo config to be used for screenshots
+	 */
+	public Solo.Config setUpConfig()
+	{
+		Solo.Config config = new Solo.Config();
+		config.screenshotFileType = Solo.Config.ScreenshotFileType.PNG;
+		return config;
 	}
 
 	public void changeActivityLocale(final Activity a, String locale) throws IOException
@@ -165,7 +188,6 @@ public abstract class ScreenshotTest<T extends Activity> extends ActivityInstrum
 	protected void tearDown() throws Exception
 	{
 		solo.finishOpenedActivities();
-
 		super.tearDown();
 	}
 
