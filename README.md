@@ -49,3 +49,6 @@ If you find it is necessary to dismiss dialogs that may open when your activity 
 To customise the output directory of your screenshots, override `setUpOutputPath(<path>)`. This takes in a path that assumes that it is being appended to `Environment.getExternalStorageDirectory()`.
 
 To customise the file type and other settings within the `Solo.Config`, override `setUpConfig()`. This config will haev the output path and be set as the config for the test in `setUp()`. By default, images are saved as `.png`
+
+# Thanks
+Thanks to umito (https://github.com/umito) for the original idea on using Solo to take the localised screenshots
