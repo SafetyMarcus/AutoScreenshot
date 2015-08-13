@@ -1,7 +1,7 @@
 # AutoScreenshot
 An easy way to take localised screenshots on Android using robotium
 
-# Set Up
+# Using AutoScreenshot
 First add autoscreenshot to your application's gradle file.
 
 `compile 'com.safetymarcus.autoscreenshot:1.0'` (Hasn't been released to JCenter/Maven yet)
@@ -29,6 +29,23 @@ public void testTakeMainActivityScreenshost() throws Throwable
 }
 ```
 
-Once the test has passed use `./adb pull "sdcard/Autoshot/"` to pull the folder of screenshots from your device. This can be changed by overwriting set up and setting up the `Solo` `Config` file before creating a new `Solo` instance.
+Once the test has passed use `./adb pull "sdcard/Autoshot/"` to pull the folder of screenshots from your device. This can be changed by overwriting set up and setting up the `Solo.Config` file before creating a new `Solo` instance.
 
 **Ensure that your manifest has the permission `<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>` as all screenshots will be written to the device sdcard.
+
+# Customisation
+By default, AutoScreenshot will take all screenshots in English. To add other languages, override `getLocales()` and return a `String[]` of the locales that you would like the screenshots to be taken in. These locales should take the form that they appear in their respective string resource folders.
+
+```
+@Override
+public String[] getLocales()
+{
+	return new String[] {"EN", "CA", "DE", "ES", "FR", "IT"};
+}
+```
+
+If you find it is necessary to dismiss dialogs that may open when your activity first starts (as I have often found) you can override `dismissDialogs()`. This is called in `setUp()` and will therefore run before each screenshot test. By default, `dismissDialogs()` is empty.
+
+To customise the output directory of your screenshots, override `setUpOutputPath(<path>)`. This takes in a path that assumes that it is being appended to `Environment.getExternalStorageDirectory()`.
+
+To customise the file type and other settings within the `Solo.Config`, override `setUpConfig()`. This config will haev the output path and be set as the config for the test in `setUp()`. By default, images are saved as `.png`
