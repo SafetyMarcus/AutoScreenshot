@@ -5,7 +5,7 @@ An easy way to take localised screenshots on Android using robotium
 # Using AutoScreenshot
 First add autoscreenshot to your application's gradle file. Ensure that you have JCenter added as one of your repositories to either your project build.gradle or your module build.gradle.
 
-`compile 'com.safetymarcus.autoscreenshot:autoscreenshot:1.0.1@aar'`
+`compile 'com.safetymarcus.autoscreenshot:autoscreenshot:1.0.3@aar'`
 
 Set up robotium to compile into your test environment. If necessary, this can easily be done in a separate directory from your other tests by using flavours.
 
