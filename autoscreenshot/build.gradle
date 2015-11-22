@@ -3,7 +3,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 // This is the library version used when deploying the artifact
-version = "1.0.1"
+version = "1.0.3"
 
 android {
     compileSdkVersion 22
@@ -22,6 +22,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 def siteUrl = 'https://github.com/SafetyMarcus/AutoScreenshot'
@@ -35,8 +38,8 @@ install {
             project {
                 packaging 'aar'
 
-                // Add your description here
-                name 'An easy way to get automated localised screenshots within your app using Robotium'
+                name 'com.safetymarcus:autoscreenshot'
+                description = 'An easy way to get automated localised screenshots within your app using Robotium'
                 url siteUrl
 
                 // Set your license
@@ -107,5 +110,11 @@ bintray {
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
         publish = true
+        version{
+            gpg{
+                sign=true
+                passphrase = properties.getProperty("bintray.gpg.password")
+            }
+        }
     }
 }
